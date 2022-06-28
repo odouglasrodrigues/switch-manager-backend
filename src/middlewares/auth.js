@@ -10,7 +10,6 @@ const secret = '1234';
 function auth(req, res, next) {
   try {
     const token = req.headers.authorization.replace('Bearer ', '');
-    console.log(token);
     jwt.verify(token, secret);
     next();
   } catch (err) {

@@ -6,7 +6,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db/conn');
 
-exports.Devices = db.define('devices', {
+const Devices = db.define('devices', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -26,7 +26,7 @@ exports.Devices = db.define('devices', {
     allowNull: false,
   },
   port: {
-    type: Sequelize.NUMBER,
+    type: Sequelize.STRING,
     allowNull: false,
   },
   type: {
@@ -46,3 +46,5 @@ exports.Devices = db.define('devices', {
     allowNull: false,
   },
 });
+
+module.exports = Devices;
