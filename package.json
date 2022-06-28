@@ -1,0 +1,24 @@
+{
+  "name": "switch-manager",
+  "version": "1.0.0",
+  "description": "Backend para conexão com os Switches e Banco de Dados(MySQL).",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/odouglasrodrigues/switch-manager-backend.git"
+  },
+  "keywords": [
+    "Huawei",
+    "Datacom",
+    "MySQL"
+  ],
+  "author": "Douglas Rodrigues",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/odouglasrodrigues/switch-manager-backend/issues"
+  },
+  "homepage": "https://github.com/odouglasrodrigues/switch-manager-backend#readme"
+}
