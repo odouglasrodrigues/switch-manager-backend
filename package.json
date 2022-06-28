@@ -4,7 +4,9 @@
   "description": "Backend para conexão com os Switches e Banco de Dados(MySQL).",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon",
+    "lint": "eslint --fix --ext .js,.jsx .",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +22,18 @@
   "bugs": {
     "url": "https://github.com/odouglasrodrigues/switch-manager-backend/issues"
   },
-  "homepage": "https://github.com/odouglasrodrigues/switch-manager-backend#readme"
+  "homepage": "https://github.com/odouglasrodrigues/switch-manager-backend#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.21.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.18.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "nodemon": "^2.0.18"
+  }
 }
