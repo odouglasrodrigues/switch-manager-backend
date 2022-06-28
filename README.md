@@ -30,7 +30,7 @@ QUIT;
 
 ```
 ### Instalação - NodeJS
-Caso ja tenha o NodeJS instalado, pode pular essa parte.
+> Caso ja tenha o NodeJS instalado, pode pular essa parte.
 
 ```bash
 curl -sL https://deb.nodesource.com/setup_16.x -o nodesource_setup.sh
