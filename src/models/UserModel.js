@@ -6,7 +6,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db/conn');
 
-exports.Usuarios = db.define('usuarios', {
+const Usuarios = db.define('usuarios', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -33,3 +33,5 @@ exports.Usuarios = db.define('usuarios', {
     type: Sequelize.JSON,
   },
 });
+
+module.exports = Usuarios;

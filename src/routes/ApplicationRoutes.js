@@ -6,10 +6,10 @@
 const express = require('express');
 
 const router = express.Router();
-const auth = require('../middlewares/auth');
-const ApplicationController = require('../controllers/ApplicationController');
+// const auth = require('../middlewares/auth');
+const UserApplicationController = require('../controllers/UserApplicationController');
 
-router.post('/login', ApplicationController.Login);
-router.post('/teste', auth, ApplicationController.Login);
+router.post('/login', UserApplicationController.Login);
+router.post('/newuser', UserApplicationController.NewUser);
 
 module.exports = router;
