@@ -7,12 +7,12 @@ const Usuarios = require('../models/UserModel');
 
 exports.NewUser = async (req, res) => {
   try {
-    // await Usuarios.create(req.body);
+    console.log(req.body);
+    await Usuarios.create(req.body);
     const users = await Usuarios.findAll();
-    console.log(users);
     return res
       .status(201)
-      .json({ status: 'sucesso', message: 'Login realizado com sucesso', dados: {} });
+      .json({ status: 'sucesso', message: 'Cadastro realizado com sucesso!', dados: { users } });
   } catch (error) {
     console.log(error);
     return res
