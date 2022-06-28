@@ -5,9 +5,32 @@
  */
 const Usuarios = require('../models/UserModel');
 
+exports.ChangeUser = async (req, res) => {
+  try {
+    await Usuarios.update(
+      {
+        name: req.body.name,
+        password: req.body.password,
+        email: req.body.email,
+        active: req.body.active,
+        permissions: req.body.permissions,
+      },
+      { where: { id: req.body.id } },
+    );
+    const users = await Usuarios.findAll();
+    return res
+      .status(201)
+      .json({ status: 'sucesso', message: 'Usuário alterado com sucesso!', dados: { users } });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(401)
+      .json({ status: 'erro', message: 'Não foi possivel alterar os dados do usuário' });
+  }
+};
+
 exports.NewUser = async (req, res) => {
   try {
-    console.log(req.body);
     await Usuarios.create(req.body);
     const users = await Usuarios.findAll();
     return res
