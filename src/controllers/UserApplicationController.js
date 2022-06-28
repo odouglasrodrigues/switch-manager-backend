@@ -3,7 +3,10 @@
  * Descrição: Arquivo responsável por controlar as ações das rotas
  * e executar os processos de usuários.
  */
+const jwt = require('jsonwebtoken');
 const Usuarios = require('../models/UserModel');
+
+const secret = '1234';
 
 exports.ChangeUser = async (req, res) => {
   try {
@@ -50,16 +53,40 @@ exports.NewUser = async (req, res) => {
     console.log(error);
     return res
       .status(401)
-      .json({ status: 'erro', message: 'Não foi possivel realizar o login' });
+      .json({ status: 'erro', message: 'Não foi possivel criar o usuário' });
   }
 };
 
-exports.Login = (req, res) => {
+exports.Login = async (req, res) => {
   try {
-    res
+    // Busca os dados do usuário baseado no email
+    const dadosDoUsuario = await Usuarios.findAll({ where: { email: req.body.email } });
+    // IF caso a busca do usuário na encontre nada
+    if (dadosDoUsuario.length === 0) {
+      return res
+        .status(401)
+        .json({ status: 'erro', message: 'Não foi possivel realizar o login - Email inválido' });
+    // IF caso o usuário esteja inativo
+    } if (!dadosDoUsuario[0].dataValues.active) {
+      return res
+        .status(401)
+        .json({ status: 'erro', message: 'O usuário está inativo', dados: {} });
+    // IF Caso a senha está errada
+    } if (dadosDoUsuario[0].dataValues.password !== req.body.password) {
+      return res
+        .status(401)
+        .json({ status: 'erro', message: 'Senha inválida', dados: {} });
+    }
+    // Login OK!
+    const token = jwt.sign({ dadosDoUsuario }, secret, {
+      expiresIn: 300, // expires in 5min
+    });
+    return res
       .status(201)
-      .json({ status: 'sucesso', message: 'Login realizado com sucesso', dados: {} });
+      .json({ status: 'sucesso', message: 'Login realizado com sucesso', dados: { jwt: token, permissoes: dadosDoUsuario[0].dataValues.permissions } });
   } catch (error) {
+    console.log(error);
+
     return res
       .status(401)
       .json({ status: 'erro', message: 'Não foi possivel realizar o login' });
