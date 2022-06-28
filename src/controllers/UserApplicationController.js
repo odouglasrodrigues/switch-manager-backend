@@ -31,6 +31,16 @@ exports.ChangeUser = async (req, res) => {
 
 exports.NewUser = async (req, res) => {
   try {
+    const EmailExiste = await Usuarios.findAll({
+      where: { email: req.body.email },
+    });
+
+    if (EmailExiste.length > 0) {
+      console.log(EmailExiste);
+      return res
+        .status(201)
+        .json({ status: 'erro', message: 'O Email informado já está cadastrado!', dados: {} });
+    }
     await Usuarios.create(req.body);
     const users = await Usuarios.findAll();
     return res
