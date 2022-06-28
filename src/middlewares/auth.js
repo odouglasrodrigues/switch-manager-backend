@@ -3,15 +3,15 @@
  * Descrição: Arquivo responsável por validar o token de autenticação do usuário.
  *
  */
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
-// const secret = '1234';
+const secret = '1234';
 
 function auth(req, res, next) {
   try {
-    // const token = req.headers.authorization.replace('Bearer ', '');
-    // const decoded = jwt.verify(token, 'secret');
-    // req.userData = decoded;
+    const token = req.headers.authorization.replace('Bearer ', '');
+    console.log(token);
+    jwt.verify(token, secret);
     next();
   } catch (err) {
     return res.status(401).json({ message: 'Falha na Autenticação!' });
