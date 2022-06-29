@@ -39,3 +39,11 @@ chmod +x nodesource_setup.sh
 apt -y install nodejs
 
 ```
+
+### Instalação - Python3
+> Pyhton já vem instalado por padrão em distribuições Ubuntu, mas caso esteja usando WSL, ou algum container pode ter algum problema com isso. Então instale o Python3 e o gerenciador de pacotes pip.
+
+```bash
+apt install python3 python3-pip -y
+
+```
