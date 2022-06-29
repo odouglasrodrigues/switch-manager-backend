@@ -19,4 +19,7 @@ router.post('/changeuserstatus', auth, UserApplicationController.ChangeUser);
 router.post('/newdevice', auth, DeviceApplicationController.NewDevice);
 router.post('/changedevice', auth, DeviceApplicationController.ChangeDevice);
 
+// Rotas para execução de comandos no equipamento
+router.post('/testdeviceconnection', auth, DeviceApplicationController.TestDeviceConnection);
+
 module.exports = router;

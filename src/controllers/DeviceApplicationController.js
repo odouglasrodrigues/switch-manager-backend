@@ -4,6 +4,8 @@
  * e executar os processos do dispositivo.
  */
 
+const shell = require('shelljs');
+const path = require('path');
 const Dispositivo = require('../models/DeviceModel');
 
 exports.ChangeDevice = async (req, res) => {
@@ -26,7 +28,6 @@ exports.ChangeDevice = async (req, res) => {
       .status(201)
       .json({ status: 'sucesso', message: 'Equipamento atualizado com sucesso!', dados: { dispositivos } });
   } catch (error) {
-    console.log(error);
     return res
       .status(401)
       .json({ status: 'erro', message: 'Não foi possivel alterar os dados do equipamento' });
@@ -51,9 +52,20 @@ exports.NewDevice = async (req, res) => {
       .status(201)
       .json({ status: 'sucesso', message: 'Equipamento criado com sucesso!', dados: { dispositivos } });
   } catch (error) {
-    console.log(error);
     return res
       .status(401)
       .json({ status: 'erro', message: 'Não foi possivel criar o equipamento' });
+  }
+};
+
+exports.TestDeviceConnection = async (req, res) => {
+  try {
+    const cmd = path.resolve(`src/methods/TestConnection.py ${req.body.ip} ${req.body.user} ${req.body.password} ${req.body.port}`);
+    const returnCommand = await shell.exec(`python3 ${cmd}`).stdout;
+    res.json(JSON.parse(returnCommand));
+  } catch (error) {
+    return res
+      .status(401)
+      .json({ status: 'erro', message: 'Houve uma falha ao conectar-se com o equipamento' });
   }
 };
