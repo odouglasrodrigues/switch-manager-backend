@@ -13,7 +13,7 @@ function auth(req, res, next) {
     jwt.verify(token, secret);
     next();
   } catch (err) {
-    return res.status(401).json({ message: 'Falha na Autenticação!' });
+    return res.status(401).json({ status: 'erro', message: 'Falha na Autenticação!' });
   }
 }
 
