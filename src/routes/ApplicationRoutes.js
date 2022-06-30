@@ -23,5 +23,6 @@ router.post('/changedevice', auth, DeviceApplicationController.ChangeDevice);
 router.post('/testdeviceconnection', auth, DeviceApplicationController.TestDeviceConnection);
 router.post('/listinterfaces', auth, DeviceApplicationController.ListDeviceInterfaces);
 router.post('/getinterfacedetail', auth, DeviceApplicationController.GetInterfaceDetail);
+router.post('/turnonoffinterface', auth, DeviceApplicationController.TurnOnOffInterface);
 
 module.exports = router;

@@ -93,3 +93,15 @@ exports.GetInterfaceDetail = async (req, res) => {
       .json({ status: 'erro', message: 'Houve uma falha ao conectar-se com o equipamento' });
   }
 };
+
+exports.TurnOnOffInterface = async (req, res) => {
+  try {
+    const cmd = path.resolve(`src/methods/TurnOnOffInterface.py ${req.body.ip} ${req.body.user} ${req.body.password} ${req.body.port} ${req.body.interface} ${req.body.turnonoff}`);
+    const returnCommand = await shell.exec(`python3 ${cmd}`).stdout;
+    res.json(JSON.parse(returnCommand));
+  } catch (error) {
+    return res
+      .status(401)
+      .json({ status: 'erro', message: 'Houve uma falha ao conectar-se com o equipamento' });
+  }
+};
