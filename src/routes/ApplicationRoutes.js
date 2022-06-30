@@ -22,5 +22,6 @@ router.post('/changedevice', auth, DeviceApplicationController.ChangeDevice);
 // Rotas para execução de comandos no equipamento
 router.post('/testdeviceconnection', auth, DeviceApplicationController.TestDeviceConnection);
 router.post('/listinterfaces', auth, DeviceApplicationController.ListDeviceInterfaces);
+router.post('/getinterfacedetail', auth, DeviceApplicationController.GetInterfaceDetail);
 
 module.exports = router;
