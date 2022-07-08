@@ -18,6 +18,7 @@ router.post('/changeuserstatus', auth, UserApplicationController.ChangeUser);
 // Rotas de gestão do equipamento
 router.post('/newdevice', auth, DeviceApplicationController.NewDevice);
 router.post('/changedevice', auth, DeviceApplicationController.ChangeDevice);
+router.get('/listdevices', auth, DeviceApplicationController.ListDevices);
 
 // Rotas para execução de comandos no equipamento
 router.post('/testdeviceconnection', auth, DeviceApplicationController.TestDeviceConnection);

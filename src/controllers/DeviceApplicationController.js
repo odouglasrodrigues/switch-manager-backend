@@ -58,6 +58,20 @@ exports.NewDevice = async (req, res) => {
   }
 };
 
+exports.ListDevices = async (req, res) => {
+  try {
+    const SwitchList = await Dispositivo.findAll();
+
+    return res
+      .status(201)
+      .json({ status: 'sucesso', message: 'Equipamentos listados com sucesso!', dados: { SwitchList } });
+  } catch (error) {
+    return res
+      .status(401)
+      .json({ status: 'erro', message: 'Não foi possivel listar os equipamentos' });
+  }
+};
+
 exports.TestDeviceConnection = async (req, res) => {
   try {
     const cmd = path.resolve(`src/methods/TestConnection.py ${req.body.ip} ${req.body.user} ${req.body.password} ${req.body.port}`);
