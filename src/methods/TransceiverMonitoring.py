@@ -6,6 +6,9 @@ import telnetlib
 import json
 import sys
 import re
+import socketio
+
+sio = socketio.Client()
 
 ip = sys.argv[1]
 user = sys.argv[2]
@@ -70,6 +73,14 @@ def GetSinalOf40GETransceiver(dados):
 def main(ip, user, password, port):
     statusMessage = {'status': 'sucesso',
                      'message': 'Conexão realizada com sucesso!', 'dados': {}}
+
+
+    try:
+
+        sio.connect('http://localhost:5000')
+
+    except Exception as e:
+        print('Erro ao conectar', e)
 
     try:
         tn = telnetlib.Telnet(ip, port, 10)
