@@ -15,7 +15,8 @@ user = sys.argv[2]
 password = sys.argv[3]
 port = sys.argv[4]
 interface = sys.argv[5]
-tempo = int(sys.argv[6])
+id = sys.argv[6]
+tempo = int(sys.argv[7])
 
 
 def GetSinalOfTransceiver(dados):
@@ -38,8 +39,10 @@ def GetSinalOfTransceiver(dados):
         if re.search(r'TX.+Power.+Low.+T', linha):
             TxSinalLow = float(linha.split(':')[1])
 
-            print('RX', [RxSinal, RxSinalHigh, RxSinalLow])
-            print('TX', [TxSinal, TxSinalHigh, TxSinalLow])
+            sio.emit('RunningMonitoring', {'rx': {'sinal': RxSinal, 'low': RxSinalLow, 'high': RxSinalHigh}, 'tx': {
+                     'sinal': TxSinal, 'low': TxSinalLow, 'high': TxSinalHigh}, 'id': id})
+            break
+    return
 
 
 def GetSinalOf40GETransceiver(dados):
@@ -66,14 +69,15 @@ def GetSinalOf40GETransceiver(dados):
         if re.search(r'TX.+Power.+Low.+T', linha):
             TxSinalLow = float(linha.split(':')[1])
 
-            print('RX', [RxSinal, RxSinalHigh, RxSinalLow])
-            print('TX', [TxSinal, TxSinalHigh, TxSinalLow])
+            sio.emit('RunningMonitoring', {'rx': {'sinal': RxSinal, 'low': RxSinalLow, 'high': RxSinalHigh}, 'tx': {
+                     'sinal': TxSinal, 'low': TxSinalLow, 'high': TxSinalHigh}, 'id': id})
+            break
+    return
 
 
 def main(ip, user, password, port):
     statusMessage = {'status': 'sucesso',
                      'message': 'Conexão realizada com sucesso!', 'dados': {}}
-
 
     try:
 
@@ -120,6 +124,7 @@ def main(ip, user, password, port):
 
         if time.time() > start+tempo+3:
             executando = False
+            sio.disconnect()
 
     # Fechando conexao com a OLT
     tn.write(b"quit\n")

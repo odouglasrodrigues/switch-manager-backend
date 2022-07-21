@@ -12,6 +12,14 @@ const io = new Server(server, {
 
 io.on('connection', (socket) => {
   console.log('Conectado', socket.id);
+
+  socket.on('StartMonitoring', (msg) => {
+    console.log('Iniciando Monitoramento', msg);
+  });
+
+  socket.emit('RunningMonitoring', (msg) => {
+    console.log('Teste', msg);
+  });
 });
 
 server.listen(5000, () => {
