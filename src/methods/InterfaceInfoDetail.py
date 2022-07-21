@@ -22,6 +22,19 @@ def GetShutdownStatus(tn, interface):
     return 'on'
 
 
+def GetTransceiverExist(tn, interface):
+    tn.write(
+        f"display transceiver interface {interface} verbose\n".encode('utf-8'))
+    time.sleep(.3)
+    transceiver_data = tn.read_until(
+        'Control flag'.encode('iso8859-1'), 3).decode('iso8859-1').splitlines()
+
+    for linha in transceiver_data:
+        if re.search(r'RX Power', linha):
+            return 'yes'
+    return 'no'
+
+
 def main(ip, user, password, port):
     statusMessage = {'status': 'sucesso',
                      'message': 'Conexão realizada com sucesso!', 'dados': {}}
@@ -49,6 +62,8 @@ def main(ip, user, password, port):
     time.sleep(.3)
 
     statusMessage['dados']['interfaceStatus'] = GetShutdownStatus(
+        tn, interface)
+    statusMessage['dados']['transceiverIsPresent'] = GetTransceiverExist(
         tn, interface)
 
     print(json.dumps(statusMessage))
