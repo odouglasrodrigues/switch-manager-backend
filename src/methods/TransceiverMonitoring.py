@@ -83,15 +83,12 @@ def main(ip, user, password, port):
 
         sio.connect('http://localhost:5000')
 
-    except Exception as e:
-        print('Erro ao conectar', e)
-
-    try:
         tn = telnetlib.Telnet(ip, port, 10)
     except Exception as e:
         statusMessage['status'], statusMessage['message'] = 'erro', 'Não foi possivel se conectar ao equipamento, verifique o IP e porta'
 
         print(json.dumps(statusMessage))
+        sio.disconnect()
         return
 
     # tn.set_debuglevel(100)
