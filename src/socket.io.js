@@ -22,12 +22,8 @@ io.on('connection', (socket) => {
   });
 
   socket.on('RunningMonitoring', (msg) => {
-    console.log(msg);
-    socket.to(msg.id).emit('RunningMonitoring', msg);
-  });
-
-  socket.on('Teste', (msg) => {
-    console.log('Testado...', msg);
+    console.log({ msg, PySioID: socket.id });
+    socket.to(msg.id).emit('RunningMonitoring', { msg, PySioID: socket.id });
   });
 });
 
