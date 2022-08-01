@@ -107,6 +107,7 @@ def main(ip, user, password, port):
 
     start = time.time()
     executando = True
+    sio.emit('TestStarted', {'id': id})
     while executando:
         tn.write(
             f"display transceiver interface {interface} verbose\n".encode('utf-8'))
@@ -120,6 +121,8 @@ def main(ip, user, password, port):
             GetSinalOfTransceiver(transceiverInfo)
 
         if time.time() > start+tempo+3:
+            sio.emit('TestFinished', {'id': id})
+            time.sleep(.3)
             executando = False
             sio.disconnect()
 

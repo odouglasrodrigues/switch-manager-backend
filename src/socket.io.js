@@ -25,6 +25,14 @@ io.on('connection', (socket) => {
     console.log({ msg, PySioID: socket.id });
     socket.to(msg.id).emit('RunningMonitoring', { msg, PySioID: socket.id });
   });
+  socket.on('TestStarted', (msg) => {
+    console.log('Teste Iniciado', msg);
+    socket.to(msg.id).emit('TestStarted', msg);
+  });
+  socket.on('TestFinished', (msg) => {
+    console.log('Teste encerrado', msg);
+    socket.to(msg.id).emit('TestFinished', msg);
+  });
 });
 
 server.listen(5000, () => {
