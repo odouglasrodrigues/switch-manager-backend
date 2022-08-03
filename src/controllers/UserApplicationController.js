@@ -79,7 +79,7 @@ exports.Login = async (req, res) => {
     }
     // Login OK!
     const token = jwt.sign({ dadosDoUsuario }, secret, {
-      expiresIn: 1800, // expires in 30min
+      expiresIn: 28800, // expires in 8hours
     });
     return res
       .status(201)
