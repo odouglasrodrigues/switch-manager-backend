@@ -72,6 +72,18 @@ mv * /etc/switchmanager-backend/
 cd /etc/switchmanager-backend/
 npm install
 
+#Execute o servidor em modo de desenvolvimento para validar a conexão com banco e criar o schema inicial
+npm run dev
+
+#Se não houver erros pare a execução com "Ctrl+C" e acesse o banco de dados para criar o primeiro usuário
+
+mysql -uroot -p
+use switchmanager
+INSERT INTO `usuarios` (`id`,`name`,`password`,`email`,`active`,`permissions`,`createdAt`,`updatedAt`) VALUES (DEFAULT,'Admin','1234','admin@xpto.com',true,'Administrador', '2022-06-28 18:03:47', '2022-06-28 18:03:47');
+quit;
+
+
+
 
 
 
