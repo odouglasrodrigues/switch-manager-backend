@@ -30,7 +30,7 @@ const Usuarios = db.define('usuarios', {
     allowNull: false,
   },
   permissions: {
-    type: Sequelize.JSON,
+    type: Sequelize.STRING,
   },
 });
 
