@@ -13,6 +13,9 @@ A Aplicação de backend, banco de dados e frontend estarão rodando na mesma m�
 #Atualizando as dependencias
 apt update && apt upgrade -y
 
+#Instalação das dependencias necessárias
+apt install curl git -y
+
 #Instalação do MySQL
 apt install mysql-server mysql-client -y
 
@@ -45,5 +48,33 @@ apt -y install nodejs
 
 ```bash
 apt install python3 python3-pip -y
+
+#Instalação dependeicas do Python
+pip install "python-socketio[client]"
+
+```
+### Instalação - Servidor
+```bash
+#Acesse a pasta "tmp" e clone o repositório
+
+cd /tmp
+git clone https://github.com/odouglasrodrigues/switch-manager-backend.git
+
+#Crie a pasta 
+mkdir /etc/switchmanager-backend
+
+#Acesse a pasta clonada e mova o conteudo para pasta criada
+
+cd switch-manager-backend/ 
+mv * /etc/switchmanager-backend/
+
+# Acesse a pasta criada e instale as dependecias 
+cd /etc/switchmanager-backend/
+npm install
+
+
+
+
+ 
 
 ```
