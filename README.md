@@ -36,7 +36,7 @@ QUIT;
 > Caso ja tenha o NodeJS instalado, pode pular essa parte.
 
 ```bash
-curl -sL https://deb.nodesource.com/setup_16.x -o nodesource_setup.sh
+curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh
 chmod +x nodesource_setup.sh
 ./nodesource_setup.sh
 apt -y install nodejs
